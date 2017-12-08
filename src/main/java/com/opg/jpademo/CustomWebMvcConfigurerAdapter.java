@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class CustomWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        MyInterceptor1  myInterceptor1 = new MyInterceptor1();
-        registry.addInterceptor(myInterceptor1).addPathPatterns("/**").excludePathPatterns("/login*");
+        //MyInterceptor1  myInterceptor1 = new MyInterceptor1();
+        //registry.addInterceptor(myInterceptor1).addPathPatterns("/**").excludePathPatterns("/login*");
     }
 }
