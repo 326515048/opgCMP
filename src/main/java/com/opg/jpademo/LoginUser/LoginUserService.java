@@ -22,8 +22,13 @@ public class LoginUserService {
     @RequestMapping("/login")
     public String login(Model model) {
         LoginUser user = new LoginUser();
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "/login";
+    }
+
+    @RequestMapping("/userForm")
+    public String userForm(Model model) {
+        return "/userForm";
     }
 
     @RequestMapping("/home")
@@ -34,27 +39,42 @@ public class LoginUserService {
     @RequestMapping("/loginSubmit")
     public String loginSubmit(LoginUser user, Model model, HttpSession session) {
         System.out.println(user.getUserName() + "  " + user.getUserPwd());
-        List<LoginUser> userlist = userRepository.findByNameAndPwd(user.getUserName(),user.getUserPwd());
+        List<LoginUser> userlist = userRepository.findByNameAndPwd(user.getUserName(), user.getUserPwd());
         if (userlist.isEmpty()) {
             return "redirect:/login";
         } else {
-            model.addAttribute("userName",user.getUserName());
+            model.addAttribute("userName", user.getUserName());
             session.setAttribute("cur_user", user.getUserName());
             return "/home";
         }
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession session){
+    public String logout(HttpSession session) {
         session.removeAttribute("cur_user");
         return "redirect:/login";
     }
 
-    @RequestMapping("/user/save/{name}/{pwd}/{phonenum}")
-    public LoginUser save(@PathVariable String name,
-                          @PathVariable String pwd,
-                          @PathVariable String phonenum) {
-        LoginUser loginUser = userRepository.save(new LoginUser(null, name, pwd, phonenum));
+    @RequestMapping(value = "/user/save", method = RequestMethod.POST)
+    @ResponseBody
+    public LoginUser save(@RequestBody LoginUser user) {
+        return userRepository.save(user);
+    }
+
+    @RequestMapping(value = "/user/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public String delete(@RequestBody LoginUser user) {
+        userRepository.delete(user);
+        return "{}";
+    }
+
+    @RequestMapping("/user/save2/{name}/{pwd}/{phonenum}")
+    @ResponseBody
+    public LoginUser save2(@PathVariable String name,
+                           @PathVariable String pwd,
+                           @PathVariable String phonenum) {
+        LoginUser loginUser = userRepository.save(new LoginUser(
+                null, name, name, pwd, phonenum, "none"));
         return loginUser;
     }
 

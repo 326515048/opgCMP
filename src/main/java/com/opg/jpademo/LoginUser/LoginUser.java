@@ -11,27 +11,39 @@ import javax.persistence.Id;
 public class LoginUser {
     @Id
     @GeneratedValue
-    private Long id;
+    private Long userID;
+    private String loginName;
     private String userName;
     private String userPwd;
     private String phoneNum;
+    private String userRole;
 
-    public LoginUser() {
+    public LoginUser(){
     }
 
-    public LoginUser(Long id, String userName, String userPwd, String phoneNum) {
-        this.id = id;
+    public LoginUser(Long userID, String loginName, String userName, String userPwd, String phoneNum, String userRole) {
+        this.userID = userID;
+        this.loginName = loginName;
         this.userName = userName;
         this.userPwd = userPwd;
         this.phoneNum = phoneNum;
+        this.userRole = userRole;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserID() {
+        return userID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserID(Long userID) {
+        this.userID = userID;
+    }
+
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
     }
 
     public String getUserName() {
@@ -56,5 +68,13 @@ public class LoginUser {
 
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 }

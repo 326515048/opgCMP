@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!--     <link rel="stylesheet" th:href="@{/jqwidgets/styles/jqx.base.css}" type="text/css" />
+        <script type="text/javascript" th:src="@{/scripts/jquery-1.11.1.min.js}"></script>
+        <script type="text/javascript" th:src="@{/jqwidgets/jqxcore.js}"></script>
+        <script type="text/javascript" th:src="@{/jqwidgets/jqxribbon.js}"></script>
+        <script type="text/javascript" th:src="@{/jqwidgets/jqxlayout.js}"></script>
+        <script type="text/javascript" th:src="@{/jqwidgets/jqxdata.js}"></script>
+        <script type="text/javascript" th:src="@{/jqwidgets/jqxbuttons.js}"></script>
+        <script type="text/javascript" th:src="@{/jqwidgets/jqxscrollbar.js}"></script>
+        <script type="text/javascript" th:src="@{/jqwidgets/jqxlistbox.js}"></script>
+        <script type="text/javascript" th:src="@{/jqwidgets/jqxdropdownlist.js}"></script>
+        <script type="text/javascript" th:src="@{/jqwidgets/jqxmenu.js}"></script>
+        <script type="text/javascript" th:src="@{/jqwidgets/jqxgrid.js}"></script>
+        <script type="text/javascript" th:src="@{/jqwidgets/jqxgrid.filter.js}"></script>
+        <script type="text/javascript" th:src="@{/jqwidgets/jqxgrid.sort.js}"></script>
+        <script type="text/javascript" th:src="@{/jqwidgets/jqxgrid.selection.js}"></script>
+        <script type="text/javascript" th:src="@{/jqwidgets/jqxpanel.js}"></script>
+        <script type="text/javascript" th:src="@{/jqwidgets/jqxcalendar.js}"></script>
+        <script type="text/javascript" th:src="@{/jqwidgets/jqxdatetimeinput.js}"></script>
+        <script type="text/javascript" th:src="@{/jqwidgets/jqxcheckbox.js}"></script>
+        <script type="text/javascript" th:src="@{/jqwidgets/globalization/globalize.js}"></script>
+        <script type="text/javascript" th:src="@{/scripts/demos.js}"></script>
+        <script type="text/javascript" th:src="@{/generatedata.js}"></script>
+     -->
+    <script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxribbon.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxlayout.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxgrid.filter.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="generatedata.js"></script>
+    <link rel="stylesheet" href="jqwidgets/styles/jqx.base.css" type="text/css"/>
+    <link rel="stylesheet" href="jqwidgets/styles/jqx.darkblue.css" type="text/css"/>
+
+    <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            padding: 3px;
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        #herder {
+            height: 50px;
+            background: blue;
+        }
+
+        .main-left {
+            width: 20%;
+            height: 700px;
+            float: left;
+        }
+
+        .main-right {
+            width: 80%;
+            height: 700px;
+            float: right;
+        }
+
+        .toolbar {
+            margin: 5px;
+        }
+
+        #footer {
+            clear: both;
+            height: 50px;
+            background: gray;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = "/user/all";
+            var source =
+            {
+                datatype: "json",
+                datafields: [
+                    {name: 'userID', type: 'int'},
+                    {name: 'loginName', type: 'string'},
+                    {name: 'userName', type: 'string'},
+                    {name: 'userPwd', type: 'string'},
+                    {name: 'phoneNum', type: 'string'},
+                    {name: 'userRole', type: 'string'}
+                ],
+                id: 'id',
+                url: url,
+                sortcolumn: 'userID',
+                sortdirection: 'asc'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $("#usergrid").jqxGrid(
+                    {
+                        width: '100%',
+                        height: 700,
+                        source: dataAdapter,
+                        showfilterrow: true,
+                        sortable: true,
+                        filterable: true,
+                        selectionmode: 'singlerow',
+                        showtoolbar: true,
+                        rendertoolbar: function (toolbar) {
+                            var container = $("<div />");
+                            container.css("margin", "5px");
+                            toolbar.append(container);
+                            container.append('<input id="cannotedit" type="button" value="关闭编辑" />');
+                            container.append('<input style="margin-left: 5px;" id="canedit" type="button" value="打开编辑" />');
+                            container.append('<input style="margin-left: 5px;" id="delete" type="button" value="删除" />');
+                            $("#cannotedit").jqxButton();
+                            $("#canedit").jqxButton();
+                            $("#delete").jqxButton();
+                            $("#delete").on('click', function () {
+                                //alert("hide");
+
+                            });
+                            $("#cannotedit").on('click', function () {
+                                $("#leftform").hide();
+                                $("#rightform").width('100%');
+                                $('#usergrid').jqxGrid('refresh');
+                            });
+                            $("#canedit").on('click', function () {
+                                $("#leftform").show();
+                                $("#rightform").width('80%');
+                                $('#usergrid').jqxGrid('refresh');
+                            });
+                        },
+                        columns: [
+                            {text: 'ID', datafield: 'userID', width: '10%'},
+                            {text: 'loginName', datafield: 'loginName', width: '20%'},
+                            {text: 'userName', datafield: 'userName', width: '20%'},
+                            {text: 'userPwd', datafield: 'userPwd', width: '20%'},
+                            {text: 'phoneNum', datafield: 'phoneNum', width: '20%'},
+                            {text: 'userRole', datafield: 'userRole', width: '10%', cellsalign: 'right'}
+                        ]
+                    });
+            $("#usergrid").on('rowselect', function (event) {
+                var rowData = event.args.row;
+                $("#userid").val(rowData.userID);
+                $("#loginName").val(rowData.loginName);
+                $("#userName").val(rowData.userName);
+                $("#userPwd").val(rowData.userPwd);
+                $("#phoneNum").val(rowData.phoneNum);
+                $("#userRole").val(rowData.userRole);
+            });
+            //save button
+            $("#Save").click(function () {
+                var savedata = {
+                    userID: $("#userid").val(),
+                    loginName: $("#loginName").val(),
+                    userName : $("#userName").val(),
+                    userPwd : $("#userPwd").val(),
+                    phoneNum : $("#phoneNum").val(),
+                    userRole : $("#userRole").val()
+                }
+                $.ajax({
+                    url: "/user/save",
+                    type: "POST",
+                    data: JSON.stringify(savedata),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+                        $("#usergrid").jqxGrid({ source: dataAdapter });
+                    },
+                    error: function (result) {
+                    }
+                });
+            });
+            //add button
+            $("#Add").click(function () {
+                var adddata = {
+                    userID: null,
+                    loginName: $("#loginName").val(),
+                    userName : $("#userName").val(),
+                    userPwd : $("#userPwd").val(),
+                    phoneNum : $("#phoneNum").val(),
+                    userRole : $("#userRole").val()
+                }
+                $.ajax({
+                    url: "/user/save",
+                    type: "POST",
+                    data: JSON.stringify(adddata),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+                        $("#usergrid").jqxGrid({ source: dataAdapter });
+                    },
+                    error: function (result) {
+                    }
+                });
+            });
+            //del button
+            $("#Delete").click(function () {
+                confirm_ = confirm('删除确认吗?');
+                if(confirm_) {
+                    var deldata = {
+                        userID: $("#userid").val()
+                    }
+                    $.ajax({
+                        url: "/user/delete",
+                        type: "POST",
+                        data: JSON.stringify(deldata),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (result) {
+                            $("#usergrid").jqxGrid({source: dataAdapter});
+                        },
+                        error: function(result) {
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="main-left" id="leftform">
+    <table>
+        <h3>用户信息</h3>
+        <tr>
+            <td align="right">ID:</td>
+            <td align="left"><input id="userid" disabled="disabled"/></td>
+        </tr>
+        <tr>
+            <td align="right">登录名:</td>
+            <td align="left"><input id="loginName"/></td>
+        </tr>
+        <tr>
+            <td align="right">用户名:</td>
+            <td align="left"><input id="userName"/></td>
+        </tr>
+        <tr>
+            <td align="right">密码:</td>
+            <td align="left"><input id="userPwd"/></td>
+        </tr>
+        <tr>
+            <td align="right">电话:</td>
+            <td align="left"><input id="phoneNum"/></td>
+        </tr>
+        <tr>
+            <td align="right">角色:</td>
+            <td align="left"><input id="userRole"/></td>
+        </tr>
+        <tr>
+            <td align="right"></td>
+            <td style="padding-top: 10px;" align="right">
+                <input style="margin-right: 5px;" type="button" id="Add" value="新增"/>
+                <input id="Save" type="button" value="保存"/>
+                <input id="Delete" type="button" value="删除"/>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="main-right" id="rightform">
+    <div id="usergrid"/>
+</div>
+</body>
+</html>
