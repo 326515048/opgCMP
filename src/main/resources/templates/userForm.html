@@ -5,29 +5,6 @@
     <title>Home</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <!--     <link rel="stylesheet" th:href="@{/jqwidgets/styles/jqx.base.css}" type="text/css" />
-        <script type="text/javascript" th:src="@{/scripts/jquery-1.11.1.min.js}"></script>
-        <script type="text/javascript" th:src="@{/jqwidgets/jqxcore.js}"></script>
-        <script type="text/javascript" th:src="@{/jqwidgets/jqxribbon.js}"></script>
-        <script type="text/javascript" th:src="@{/jqwidgets/jqxlayout.js}"></script>
-        <script type="text/javascript" th:src="@{/jqwidgets/jqxdata.js}"></script>
-        <script type="text/javascript" th:src="@{/jqwidgets/jqxbuttons.js}"></script>
-        <script type="text/javascript" th:src="@{/jqwidgets/jqxscrollbar.js}"></script>
-        <script type="text/javascript" th:src="@{/jqwidgets/jqxlistbox.js}"></script>
-        <script type="text/javascript" th:src="@{/jqwidgets/jqxdropdownlist.js}"></script>
-        <script type="text/javascript" th:src="@{/jqwidgets/jqxmenu.js}"></script>
-        <script type="text/javascript" th:src="@{/jqwidgets/jqxgrid.js}"></script>
-        <script type="text/javascript" th:src="@{/jqwidgets/jqxgrid.filter.js}"></script>
-        <script type="text/javascript" th:src="@{/jqwidgets/jqxgrid.sort.js}"></script>
-        <script type="text/javascript" th:src="@{/jqwidgets/jqxgrid.selection.js}"></script>
-        <script type="text/javascript" th:src="@{/jqwidgets/jqxpanel.js}"></script>
-        <script type="text/javascript" th:src="@{/jqwidgets/jqxcalendar.js}"></script>
-        <script type="text/javascript" th:src="@{/jqwidgets/jqxdatetimeinput.js}"></script>
-        <script type="text/javascript" th:src="@{/jqwidgets/jqxcheckbox.js}"></script>
-        <script type="text/javascript" th:src="@{/jqwidgets/globalization/globalize.js}"></script>
-        <script type="text/javascript" th:src="@{/scripts/demos.js}"></script>
-        <script type="text/javascript" th:src="@{/generatedata.js}"></script>
-     -->
     <script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
     <script type="text/javascript" src="jqwidgets/jqxribbon.js"></script>
@@ -66,22 +43,23 @@
             background: blue;
         }
 
-        .main-left {
-            width: 20%;
-            height: 700px;
+        .box1 {
             float: left;
-        }
-
-        .main-right {
-            width: 80%;
+            width: 250px;
             height: 700px;
-            float: right;
+            border:2px solid;
+            border-radius:15px;
         }
-
-        .toolbar {
-            margin: 5px;
+        .box2 {
+            margin-left: 254px;
+            background: blue;
+            height: 700px;
         }
-
+        .box2-content {
+            width: 98%;
+            height: 98%;
+        }
+        
         #footer {
             clear: both;
             height: 50px;
@@ -126,7 +104,7 @@
                             toolbar.append(container);
                             container.append('<input id="cannotedit" type="button" value="关闭编辑" />');
                             container.append('<input style="margin-left: 5px;" id="canedit" type="button" value="打开编辑" />');
-                            container.append('<input style="margin-left: 5px;" id="delete" type="button" value="删除" />');
+                            // container.append('<input style="margin-left: 5px;" id="delete" type="button" value="删除" />');
                             $("#cannotedit").jqxButton();
                             $("#canedit").jqxButton();
                             $("#delete").jqxButton();
@@ -136,12 +114,12 @@
                             });
                             $("#cannotedit").on('click', function () {
                                 $("#leftform").hide();
-                                $("#rightform").width('100%');
+                                $("#rightform").css("margin-left","0px");
                                 $('#usergrid').jqxGrid('refresh');
                             });
                             $("#canedit").on('click', function () {
                                 $("#leftform").show();
-                                $("#rightform").width('80%');
+                                $("#rightform").css("margin-left","254px");
                                 $('#usergrid').jqxGrid('refresh');
                             });
                         },
@@ -234,45 +212,46 @@
     </script>
 </head>
 <body>
-<div class="main-left" id="leftform">
-    <table>
-        <h3>用户信息</h3>
-        <tr>
-            <td align="right">ID:</td>
-            <td align="left"><input id="userid" disabled="disabled"/></td>
-        </tr>
-        <tr>
-            <td align="right">登录名:</td>
-            <td align="left"><input id="loginName"/></td>
-        </tr>
-        <tr>
-            <td align="right">用户名:</td>
-            <td align="left"><input id="userName"/></td>
-        </tr>
-        <tr>
-            <td align="right">密码:</td>
-            <td align="left"><input id="userPwd"/></td>
-        </tr>
-        <tr>
-            <td align="right">电话:</td>
-            <td align="left"><input id="phoneNum"/></td>
-        </tr>
-        <tr>
-            <td align="right">角色:</td>
-            <td align="left"><input id="userRole"/></td>
-        </tr>
-        <tr>
-            <td align="right"></td>
-            <td style="padding-top: 10px;" align="right">
-                <input style="margin-right: 5px;" type="button" id="Add" value="新增"/>
-                <input id="Save" type="button" value="保存"/>
-                <input id="Delete" type="button" value="删除"/>
-            </td>
-        </tr>
-    </table>
-</div>
-<div class="main-right" id="rightform">
-    <div id="usergrid"/>
-</div>
+    <div class="box1" id="leftform">
+        <table>
+            <h3>用户信息</h3>
+            <tr>
+                <td align="right">ID:</td>
+                <td align="left"><input id="userid" disabled="disabled"/></td>
+            </tr>
+            <tr>
+                <td align="right">登录名:</td>
+                <td align="left"><input id="loginName"/></td>
+            </tr>
+            <tr>
+                <td align="right">用户名:</td>
+                <td align="left"><input id="userName"/></td>
+            </tr>
+            <tr>
+                <td align="right">密码:</td>
+                <td align="left"><input id="userPwd"/></td>
+            </tr>
+            <tr>
+                <td align="right">电话:</td>
+                <td align="left"><input id="phoneNum"/></td>
+            </tr>
+            <tr>
+                <td align="right">角色:</td>
+                <td align="left"><input id="userRole"/></td>
+            </tr>
+            <tr>
+                <td align="right"></td>
+                <td style="padding-top: 10px;" align="right">
+                    <input style="margin-right: 5px;" type="button" id="Add" value="新增"/>
+                    <input id="Save" type="button" value="保存"/>
+                    <input id="Delete" type="button" value="删除"/>
+                </td>
+            </tr>
+        </table>
+    </div> 
+    <div class="box2" id="rightform">
+        <div id="usergrid"/>
+    </div> 
+
 </body>
 </html>
