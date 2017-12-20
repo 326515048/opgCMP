@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>basic-sort</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="js/bootstrap.min.css">
+    <link rel="stylesheet" href="js/bootstrap-table.css">
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-table.min.js"></script>
+	<!-- put your locale files after bootstrap-table.js -->
+	<script src="js/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#table').on('click-row.bs.table', function (row, element) {
+                alert(element.name);
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Basic Sort</h1>
+        <p>Use <code>sortName</code>, <code>sortOrder</code>, <code>sortable</code> options, and <code>sortable</code>, <code>order</code> column options to set the basic sort of bootstrap table.</p>
+        <table id="table"
+               data-toggle="table"
+               data-height="460"
+               data-url="json/data1.json"
+               data-search="true"
+               data-sort-name="name"
+               data-sort-order="asc">
+            <thead>
+            <tr>
+                <th data-field="id" data-sortable="true">Item ID</th>
+                <th data-field="name" data-sortable="true">Item Name</th>
+                <th data-field="price" data-sortable="true">Item Price</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+</html>
