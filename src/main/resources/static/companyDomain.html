@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-table.css">
+    <script src="tablejs3/jquery.min.js"></script>
+    <script src="tablejs3/bootstrap.min.js"></script>
+    <script src="tablejs3/bootstrap-table.js"></script>
+    <!-- put your locale files after bootstrap-table.js -->
+    <script src="js/bootstrap-table-zh-CN.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            $("#table").on('click-row.bs.table', function (row, rowData) {
+                $("#companyDomainID").val(rowData.companyDomainID);
+                $("#companyName").val(rowData.companyName);
+                $("#domainName").val(rowData.domainName);
+                $("#domainType").val(rowData.domainType);
+                $("#userName").val(rowData.userName);
+            });
+            //save button
+            $("#Save").click(function () {
+                var savedata = {
+                    companyDomainID: $("#companyDomainID").val(),
+                    companyName: $("#companyName").val(),
+                    domainName : $("#domainName").val(),
+                    domainType : $("#domainType").val(),
+                    userName : $("#userName").val()
+                }
+                $.ajax({
+                    url: "/companyDomain/save",
+                    type: "POST",
+                    data: JSON.stringify(savedata),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+                        $("#table").bootstrapTable('refresh');
+                    },
+                    error: function (result) {
+                    }
+                });
+            });
+            //add button
+            $("#Add").click(function () {
+                var adddata = {
+                    companyDomainID: null,
+                    companyName: $("#companyName").val(),
+                    domainName : $("#domainName").val(),
+                    domainType : $("#domainType").val(),
+                    userName : $("#userName").val()
+                }
+                $.ajax({
+                    url: "/companyDomain/save",
+                    type: "POST",
+                    data: JSON.stringify(adddata),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+                        $("#table").bootstrapTable('refresh');
+                    },
+                    error: function (result) {
+                    }
+                });
+            });
+            //del button
+            $("#Delete").click(function () {
+                confirm_ = confirm('删除确认吗?');
+                if(confirm_) {
+                    var deldata = {
+                        companyDomainID: $("#companyDomainID").val()
+                    }
+                    $.ajax({
+                        url: "/companyDomain/delete",
+                        type: "POST",
+                        data: JSON.stringify(deldata),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (result) {
+                            $("#table").bootstrapTable('refresh');
+                        },
+                        error: function(result) {
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="col-sm-2" id="leftform">
+            <table>
+                <h3>域名信息</h3>
+                <tr>
+                    <td align="right">ID:</td>
+                    <td align="left"><input id="companyDomainID" disabled="disabled"/></td>
+                </tr>
+                <tr>
+                    <td align="right">公司名称:</td>
+                    <td align="left"><input id="companyName"/></td>
+                </tr>
+                <tr>
+                    <td align="right">域名:</td>
+                    <td align="left"><input id="domainName"/></td>
+                </tr>
+                <tr>
+                    <td align="right">类型:</td>
+                    <td align="left"><input id="domainType"/></td>
+                </tr>
+                <tr>
+                    <td align="right">用户名:</td>
+                    <td align="left"><input id="userName"/></td>
+                </tr>
+                <tr>
+                    <td align="right"></td>
+                    <td style="padding-top: 10px;" align="right">
+                        <input style="margin-right: 5px;" type="button" id="Add" value="新增"/>
+                        <input id="Save" type="button" value="保存"/>
+                        <input id="Delete" type="button" value="删除"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-sm-10" id="rightform">
+            <div id="toolbar">
+                <button id="refreshBtn" class="btn btn-default">refresh</button>
+            </div>
+            <table id="table"
+                   data-toggle="table"
+                   data-toolbar="#toolbar"
+                   data-search="true"
+                   data-height="600"
+                   data-url="/companyDomain/all"
+                   data-sort-name="companyDomainID"
+                   data-sort-order="asc">
+                <thead>
+                <tr>
+                    <th data-field="companyDomainID" data-sortable="true">ID</th>
+                    <th data-field="companyName" data-sortable="true">公司名称</th>
+                    <th data-field="domainName" data-sortable="true">域名</th>
+                    <th data-field="domainType" data-sortable="true">类型</th>
+                    <th data-field="userName" data-sortable="true">用户名</th>      
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
