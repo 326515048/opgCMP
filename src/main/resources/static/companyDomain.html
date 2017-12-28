@@ -93,40 +93,39 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="col-sm-2" id="leftform">
-            <table>
-                <h3>域名信息</h3>
-                <tr>
-                    <td align="right">ID:</td>
-                    <td align="left"><input id="companyDomainID" disabled="disabled"/></td>
-                </tr>
-                <tr>
-                    <td align="right">公司名称:</td>
-                    <td align="left"><input id="companyName"/></td>
-                </tr>
-                <tr>
-                    <td align="right">域名:</td>
-                    <td align="left"><input id="domainName"/></td>
-                </tr>
-                <tr>
-                    <td align="right">类型:</td>
-                    <td align="left"><input id="domainType"/></td>
-                </tr>
-                <tr>
-                    <td align="right">用户名:</td>
-                    <td align="left"><input id="userName"/></td>
-                </tr>
-                <tr>
-                    <td align="right"></td>
-                    <td style="padding-top: 10px;" align="right">
-                        <input style="margin-right: 5px;" type="button" id="Add" value="新增"/>
-                        <input id="Save" type="button" value="保存"/>
-                        <input id="Delete" type="button" value="删除"/>
-                    </td>
-                </tr>
-            </table>
+        <div class="col-sm-3" id="leftform">
+            <h3>域名信息</h3>
+            <label for="name" class="col-sm-4 control-label">ID</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="companyDomainID" disabled="disabled" />
+            </div>
+            <label for="name" class="col-sm-4 control-label">公司名称</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="companyName" />
+            </div>
+            <label for="name" class="col-sm-4 control-label">域名</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="domainName" />
+            </div>
+            <label for="name" class="col-sm-4 control-label">类型</label>
+            <div class="col-sm-8">
+                <!-- <input type="text" class="form-control" id="domainType" /> -->
+                <select class="form-control" id="domainType">
+                  <option>vod</option>
+                  <option>live</option>
+                </select>
+            </div>
+            <label for="name" class="col-sm-4 control-label">用户名</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="userName" />
+            </div>
+            <div class="col-sm-12" align="right" style="margin-top: 10px">
+                    <input style="margin-right: 5px;" id="Add" type="button" value="新增"/>
+                    <input style="margin-right: 5px;" id="Save" type="button" value="保存"/>
+                    <input id="Delete" type="button" value="删除"/>
+            </div>
         </div>
-        <div class="col-sm-10" id="rightform">
+        <div class="col-sm-9" id="rightform">
             <div id="toolbar">
                 <button id="refreshBtn" class="btn btn-default">refresh</button>
             </div>
