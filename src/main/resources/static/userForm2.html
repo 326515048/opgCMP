@@ -22,6 +22,7 @@
                 $("#userName").val(rowData.userName);
                 $("#userPwd").val(rowData.userPwd);
                 $("#phoneNum").val(rowData.phoneNum);
+                $("#companyName").val(rowData.companyName);
                 $("#userRole").val(rowData.userRole);
             });
             //save button
@@ -32,6 +33,7 @@
                     userName : $("#userName").val(),
                     userPwd : $("#userPwd").val(),
                     phoneNum : $("#phoneNum").val(),
+                    companyName : $("#companyName").val(),
                     userRole : $("#userRole").val()
                 }
                 $.ajax({
@@ -55,6 +57,7 @@
                     userName : $("#userName").val(),
                     userPwd : $("#userPwd").val(),
                     phoneNum : $("#phoneNum").val(),
+                    companyName : $("#companyName").val(),
                     userRole : $("#userRole").val()
                 }
                 $.ajax({
@@ -118,6 +121,10 @@
             <div class="col-sm-8">
                 <input type="text" class="form-control" id="phoneNum" />
             </div>
+            <label for="name" class="col-sm-4 control-label">公司名称</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="companyName" />
+            </div>
             <label for="name" class="col-sm-4 control-label">角色</label>
             <div class="col-sm-8">
                 <input type="text" class="form-control" id="userRole" />
@@ -147,6 +154,7 @@
                     <th data-field="userName" data-sortable="true">用户名</th>
                     <th data-field="userPwd" data-sortable="true">密码</th>
                     <th data-field="phoneNum" data-sortable="true">电话</th>
+                    <th data-field="companyName" data-sortable="true">公司名称</th>
                     <th data-field="userRole" data-sortable="true">角色</th>
                 </tr>
                 </thead>

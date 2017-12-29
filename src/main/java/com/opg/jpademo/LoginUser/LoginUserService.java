@@ -68,16 +68,6 @@ public class LoginUserService {
         return "{}";
     }
 
-    @RequestMapping("/user/save2/{name}/{pwd}/{phonenum}")
-    @ResponseBody
-    public LoginUser save2(@PathVariable String name,
-                           @PathVariable String pwd,
-                           @PathVariable String phonenum) {
-        LoginUser loginUser = userRepository.save(new LoginUser(
-                null, name, name, pwd, phonenum, "none"));
-        return loginUser;
-    }
-
     @RequestMapping("/user/all")
     @ResponseBody
     public List<LoginUser> all() {

@@ -16,17 +16,19 @@ public class LoginUser {
     private String userName;
     private String userPwd;
     private String phoneNum;
+    private String companyName;
     private String userRole;
 
     public LoginUser(){
     }
 
-    public LoginUser(Long userID, String loginName, String userName, String userPwd, String phoneNum, String userRole) {
+    public LoginUser(Long userID, String loginName, String userName, String userPwd, String phoneNum, String companyName, String userRole) {
         this.userID = userID;
         this.loginName = loginName;
         this.userName = userName;
         this.userPwd = userPwd;
         this.phoneNum = phoneNum;
+        this.companyName = companyName;
         this.userRole = userRole;
     }
 
@@ -68,6 +70,14 @@ public class LoginUser {
 
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public String getUserRole() {

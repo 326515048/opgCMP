@@ -12,7 +12,6 @@ public class CompanyDomain {
     @Id
     @GeneratedValue
     private Long companyDomainID;
-    private String companyName;
     private String domainName;
     private String domainType;
     private String userName;
@@ -20,9 +19,8 @@ public class CompanyDomain {
     public CompanyDomain(){
     }
 
-    public CompanyDomain(Long companyDomainID, String companyName, String domainName, String domainType, String userName) {
+    public CompanyDomain(Long companyDomainID, String domainName, String domainType, String userName) {
         this.companyDomainID = companyDomainID;
-        this.companyName = companyName;
         this.domainName = domainName;
         this.domainType = domainType;
         this.userName = userName;
@@ -34,14 +32,6 @@ public class CompanyDomain {
 
     public void setCompanyDomainID(Long companyDomainID) {
         this.companyDomainID = companyDomainID;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
     }
 
     public String getDomainName() {
