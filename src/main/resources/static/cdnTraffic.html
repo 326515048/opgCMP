@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-table.css">
+    <script src="tablejs3/jquery.min.js"></script>
+    <script src="tablejs3/bootstrap.min.js"></script>
+    <script src="tablejs3/bootstrap-table.js"></script>
+    <!-- put your locale files after bootstrap-table.js -->
+    <script src="js/bootstrap-table-zh-CN.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+            $("#table").on('click-row.bs.table', function (row, rowData) {
+                $("#trafficID").val(rowData.trafficID);
+                $("#trafficUtcTime").val(rowData.trafficUtcTime);
+                $("#domainName").val(rowData.domainName);
+                $("#trafficValue").val(rowData.trafficValue);
+                $("#cdnCompany").val(rowData.cdnCompany);
+            });
+            //save button
+            function save2add(mode){
+                var id = null;
+                if (mode == "save"){
+                    id = $("#trafficID").val();
+                }
+                var savedata = {
+                    trafficID: id,
+                    trafficUtcTime : $("#trafficUtcTime").val(),
+                    domainName : $("#domainName").val(),
+                    trafficValue : $("#trafficValue").val(),
+                    cdnCompany : $("#cdnCompany").val()
+                }
+                $.ajax({
+                    url: "/cdnTraffic/save",
+                    type: "POST",
+                    data: JSON.stringify(savedata),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+                        $("#table").bootstrapTable('refresh');
+                    },
+                    error: function (result) {
+                    }
+                });
+            }
+
+            $("#Save").click(function () {
+                save2add("save");
+            });
+            //add button
+            $("#Add").click(function () {
+                save2add("add");
+            });
+            //del button
+            $("#Delete").click(function () {
+                confirm_ = confirm('删除确认吗?');
+                if(confirm_) {
+                    var deldata = {
+                        trafficID: $("#trafficID").val()
+                    }
+                    $.ajax({
+                        url: "/cdnTraffic/delete",
+                        type: "POST",
+                        data: JSON.stringify(deldata),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (result) {
+                            $("#table").bootstrapTable('refresh');
+                        },
+                        error: function(result) {
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="col-sm-3" id="leftform">
+            <h3>CDN流量</h3>
+            <label for="name" class="col-sm-4 control-label">ID</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="trafficID" disabled="disabled" />
+            </div>
+            <label for="name" class="col-sm-4 control-label">时间戳</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="trafficUtcTime" />
+            </div>
+            <label for="name" class="col-sm-4 control-label">域名</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="domainName" />
+            </div>
+            <label for="name" class="col-sm-4 control-label">流量值</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="trafficValue" />
+            </div>
+            <label for="name" class="col-sm-4 control-label">CDN服务商</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="cdnCompany" />
+            </div>
+            <div class="col-sm-12" align="right" style="margin-top: 10px">
+                    <input style="margin-right: 5px;" id="Add" type="button" value="新增"/>
+                    <input style="margin-right: 5px;" id="Save" type="button" value="保存"/>
+                    <input id="Delete" type="button" value="删除"/>
+            </div>
+        </div>
+        <div class="col-sm-9" id="rightform">
+            <div id="toolbar">
+                <button id="refreshBtn" class="btn btn-default">refresh</button>
+            </div>
+            <table id="table"
+                   data-toggle="table"
+                   data-toolbar="#toolbar"
+                   data-search="true"
+                   data-height="600"
+                   data-url="/cdnTraffic/all"
+                   data-sort-name="trafficID"
+                   data-sort-order="asc">
+                <thead>
+                <tr>
+                    <th data-field="trafficID" data-sortable="true">ID</th>
+                    <th data-field="trafficUtcTime" data-sortable="true">时间戳</th>
+                    <th data-field="domainName" data-sortable="true">域名</th>
+                    <th data-field="trafficValue" data-sortable="true">流量值</th>   
+                    <th data-field="cdnCompany" data-sortable="true">CDN服务商</th>   
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
