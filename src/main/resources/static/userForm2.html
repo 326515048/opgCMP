@@ -7,15 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-table.css">
+    <link rel="stylesheet" href="css/bootstrap-switch.min.css">
     <script src="tablejs3/jquery.min.js"></script>
     <script src="tablejs3/bootstrap.min.js"></script>
     <script src="tablejs3/bootstrap-table.js"></script>
+    <script src="tablejs3/bootstrap-switch.min.js"></script>
     <!-- put your locale files after bootstrap-table.js -->
-    <script src="js/bootstrap-table-zh-CN.min.js"></script>
+    <!-- <script src="js/bootstrap-table-zh-CN.min.js"></script> -->
 
     <script type="text/javascript">
         $(document).ready(function () {
             
+            $("[name='my-checkbox']").bootstrapSwitch();
+            $("#leftform").hide();
             $("#usertable").on('click-row.bs.table', function (row, rowData) {
                 $("#userid").val(rowData.userID);
                 $("#loginName").val(rowData.loginName);
@@ -94,6 +98,18 @@
                     });
                 }
             });
+            $('input[name="my-checkbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
+            　　if(state) {
+                    $("#leftform").show();
+                    $("#rightform").attr("class", "col-sm-9");
+                    $("#usertable").bootstrapTable('refresh');
+                }else{
+                    $("#leftform").hide();
+                    $("#rightform").attr("class", "col-sm-12");
+                    $("#usertable").bootstrapTable('refresh');  
+                }
+            });
+            
         });
     </script>
 </head>
@@ -135,9 +151,9 @@
                     <input id="Delete" type="button" value="删除"/>
             </div>
         </div>
-        <div class="col-sm-9" id="rightform">
+        <div class="col-sm-12" id="rightform">
             <div id="toolbar">
-                <button id="button" class="btn btn-default">refresh</button>
+                <input id="editCheckbox" type="checkbox" name="my-checkbox" data-label-text="编辑" unchecked/>
             </div>
             <table id="usertable"
                    data-toggle="table"
