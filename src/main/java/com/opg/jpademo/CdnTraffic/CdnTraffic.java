@@ -17,13 +17,13 @@ public class CdnTraffic {
     private String trafficID;
     private String trafficUtcTime;
     private String domainName;
-    private String trafficValue;
+    private double trafficValue;
     private String cdnCompany;
 
     public CdnTraffic(){
     }
 
-    public CdnTraffic(String trafficID, String trafficUtcTime, String domainName, String trafficValue, String cdnCompany) {
+    public CdnTraffic(String trafficID, String trafficUtcTime, String domainName, double trafficValue, String cdnCompany) {
         this.trafficID = trafficID;
         this.trafficUtcTime = trafficUtcTime;
         this.domainName = domainName;
@@ -55,11 +55,11 @@ public class CdnTraffic {
         this.domainName = domainName;
     }
 
-    public String getTrafficValue() {
+    public double getTrafficValue() {
         return trafficValue;
     }
 
-    public void setTrafficValue(String trafficValue) {
+    public void setTrafficValue(double trafficValue) {
         this.trafficValue = trafficValue;
     }
 
