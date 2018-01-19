@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="tablejs3/jquery.min.js"></script>
+    <script src="hchartjs/highstock.js"></script>
+    <script src="hchartjs/exporting.js"></script>
+    <script src="hchartjs/highcharts-zh_CN.js"></script>
+    <!-- put your locale files after bootstrap-table.js -->
+    <!-- <script src="js/bootstrap-table-zh-CN.min.js"></script> -->
+
+    <script type="text/javascript">
+
+        $.getJSON('https://data.jianshukeji.com/stock/history/000001', function (data) {
+            if(data.code !== 1) {
+                alert('读取股票数据失败！');
+                return false;
+            }
+            data = data.data;
+            // 去掉多余的数据
+            Highcharts.each(data, function(d) {
+                d.length = 2;
+            });
+            Highcharts.stockChart('container', {
+                rangeSelector: {
+                    selected: 2
+                },
+                title: {
+                    text: '平安银行历史股价'
+                },
+                plotOptions: {
+                    series: {
+                        showInLegend: true
+                    }
+                },
+                tooltip: {
+                    split: false,
+                    shared: true
+                },
+                series: [{
+                    // type: 'line',
+                    id: '000001',
+                    name: '平安银行',
+                    data: data
+                }]
+            });
+        });
+    </script>
+</head>    
+<body>
+    <div id="container" style="min-width: 400px;height: 400px"></div>
+
+</body>
+</html>

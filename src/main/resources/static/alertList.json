@@ -1,0 +1,22 @@
+[ {
+  "serviceID" : 1,
+  "serviceName" : "服务器",
+  "serviceIP" : "10.10.10.10",
+  "alertInfo" : "磁盘空间不足",
+  "alertTime" : "2018-01-19 10:45:00",
+  "alertState" : "异常"
+}, {
+  "serviceID" : 2,
+  "serviceName" : "调度模块",
+  "serviceIP" : "100.100.10.10",
+  "alertInfo" : "无法访问",
+  "alertTime" : "2018-01-19 10:45:00",
+  "alertState" : "异常"
+}, {
+  "serviceID" : 3,
+  "serviceName" : "播测",
+  "serviceIP" : "ah.live.bestvcdn.com",
+  "alertInfo" : "播测返回404",
+  "alertTime" : "2018-01-19 10:45:00",
+  "alertState" : "异常"
+} ]
